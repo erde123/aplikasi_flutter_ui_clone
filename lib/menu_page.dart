@@ -3,6 +3,8 @@
 import 'package:aplikasi_flutter/detail_menu_page.dart';
 import 'package:aplikasi_flutter/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
+import 'package:auto_height_grid_view/auto_height_grid_view.dart';
 
 void main() => runApp(const MenuApp());
 
@@ -85,10 +87,7 @@ class MenuApp extends StatelessWidget {
           backgroundColor: Colors.white60,
           leading: IconButton(
               onPressed: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) {
-                  return MyApp();
-                }));
+                Navigator.pop(context);
               },
               icon: Icon(
                 Icons.arrow_back_ios_new,
@@ -111,15 +110,28 @@ class MenuApp extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                childAspectRatio: 0.95/1.05,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10),
+          child: AutoHeightGridView(
             itemCount: foodItems.length,
-            itemBuilder: (BuildContext context, int index) => buildCard(context,item: foodItems[index]),
+            crossAxisCount: 2,
+            builder: (context, index)
+            => buildCard(context, item: foodItems[index]),
           ),
+
+          // child: DynamicHeightGridView(
+          //   itemCount: foodItems.length,
+          //   crossAxisCount: 2,
+          //   builder: (context, index) =>
+          //     buildCard(context, item: foodItems[index]),
+          // ),
+          // child: GridView.builder(
+          //   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          //       maxCrossAxisExtent: 200,
+          //       childAspectRatio: 0.95/1.05,
+          //       crossAxisSpacing: 10,
+          //       mainAxisSpacing: 10),
+          //   itemCount: foodItems.length,
+          //   itemBuilder: (BuildContext context, int index) => buildCard(context,item: foodItems[index]),
+          // ),
         ),
       ),
     ));
@@ -149,31 +161,37 @@ class MenuApp extends StatelessWidget {
           Row(
             children: [
               SizedBox(width: 5),
-              Text(
-                item.name,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Expanded(
+                child: Text(
+                  item.name,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), maxLines: 2, overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
           ),
-          Row(
-            children: [
-              SizedBox(width: 5),
-              Icon(Icons.local_fire_department_outlined),
-              Text(item.calories),
-              SizedBox(width: 30),
-              Icon(Icons.access_alarm),
-              Text(item.time),
-            ],
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Wrap(
+              children: [
+                Icon(Icons.local_fire_department_outlined),
+                Text(item.calories),
+                SizedBox(width: 10),
+                Icon(Icons.access_alarm),
+                Text(item.time),
+              ],
+            ),
           ),
-          Row(
-            children: [
-              SizedBox(width: 5),
-              Icon(
-                Icons.star,
-                color: Colors.yellow,
-              ),
-              Text('${item.rating} /5 (${item.review} Reviews)'),
-            ],
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Wrap(
+              children: [
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
+                Text('${item.rating} /5 (${item.review} Reviews)'),
+              ],
+            ),
           ),
         ],
       ),

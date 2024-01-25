@@ -131,112 +131,122 @@ class MyApp extends StatelessWidget {
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   ),
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: Colors.lightGreen,
-                          foregroundColor: Colors.white,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: Colors.lightGreen,
+                            foregroundColor: Colors.white,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                            ),
                           ),
+                          onPressed: () {},
+                          child: Text("All"),
                         ),
-                        onPressed: () {},
-                        child: Text("All"),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          foregroundColor: Colors.black,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.black,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                            ),
                           ),
+                          onPressed: () {},
+                          child: Text("Breakfast"),
                         ),
-                        onPressed: () {},
-                        child: Text("Breakfast"),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          foregroundColor: Colors.black,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.black,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                            ),
                           ),
+                          onPressed: () {},
+                          child: Text("Lunch"),
                         ),
-                        onPressed: () {},
-                        child: Text("Lunch"),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          foregroundColor: Colors.black,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.black,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                            ),
                           ),
+                          onPressed: () {},
+                          child: Text("Dinner"),
                         ),
-                        onPressed: () {},
-                        child: Text("Dinner"),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "Quick & Easy",
-                        style: TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.bold),
+                SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        // spacing: 170,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "Quick & Easy",
+                              style: TextStyle(
+                                  fontSize: 25, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              foregroundColor: Colors.lightBlueAccent,
+                            ),
+                            onPressed: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return MenuApp();
+                                  }));
+                            },
+                            child: Text(
+                              "View All",
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 170.0, top: 10.0),
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          foregroundColor: Colors.lightBlueAccent,
-                        ),
-                        onPressed: () {
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (context) {
-                            return MenuApp();
-                          }));
-                        },
-                        child: Text(
-                          "View All",
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w400),
-                        ),
-                      ),
-                    ),
-                  ],
+                      Container(
+                        height: 400,
+                        child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: foodItems.length,
+                              separatorBuilder: (BuildContext context, _) =>
+                                  SizedBox(
+                                    width: 12,
+                                  ),
+                              itemBuilder: (BuildContext context, int index) =>
+                                  buildCard(item: foodItems[index]),
+                            )),
+                      )
+                    ],
+                  ),
                 ),
-                Container(
-                    height: 400,
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: foodItems.length,
-                        separatorBuilder: (BuildContext context, _) => SizedBox(
-                          width: 12,
-                        ),
-                        itemBuilder: (BuildContext context, int index) =>
-                            buildCard(item: foodItems[index]),
-                    )),
-                )
               ],
             ),
           ),
@@ -264,6 +274,7 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+
   Widget buildCard({required FoodItem item}) {
     return Container(
       width: 300,
