@@ -203,28 +203,34 @@ class MyApp extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         // spacing: 170,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              "Quick & Easy",
-                              style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold),
+                          Flexible(
+                            flex: 1,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "Quick & Easy",
+                                style: TextStyle(
+                                    fontSize: 25, fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
-                          TextButton(
-                            style: TextButton.styleFrom(
-                              foregroundColor: Colors.lightBlueAccent,
-                            ),
-                            onPressed: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                    return MenuApp();
-                                  }));
-                            },
-                            child: Text(
-                              "View All",
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w400),
+                          Flexible(
+                            flex: 1,
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                foregroundColor: Colors.lightBlueAccent,
+                              ),
+                              onPressed: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return MenuApp();
+                                    }));
+                              },
+                              child: Text(
+                                "View All",
+                                style: TextStyle(
+                                    fontSize: 14, fontWeight: FontWeight.w400),
+                              ),
                             ),
                           ),
                         ],
