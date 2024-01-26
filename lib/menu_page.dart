@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:auto_height_grid_view/auto_height_grid_view.dart';
 import 'package:flexible_grid_view/flexible_grid_view.dart';
-import 'package:responsive_grid_list/responsive_grid_list.dart';
+// import 'package:responsive_grid_list/responsive_grid_list.dart';
+import 'package:responsive_grid/responsive_grid.dart';
 
 void main() => runApp(const MenuApp());
 
@@ -112,19 +113,35 @@ class MenuApp extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-            // child: ResponsiveGridList(
-            //     horizontalGridSpacing: 16,
-            //     verticalGridSpacing: 16,
-            //     horizontalGridMargin: 50,
-            //     verticalGridMargin: 50,
-            //     minItemWidth: 300,
-            //     children: buildCard(context, item: item)
-            // );
 
-          // child: FlexibleGridView(
-          //   children: [
-          //   ],
+          child: ResponsiveGridList(
+              desiredItemWidth: 100,
+              minSpacing: 10,
+              children: List.generate(foodItems.length-1, (index)=> index+1).map((i) {
+                return
+                  buildCard(context, item: foodItems[i]);
+              }).toList()
+          ),
+
+          // child: ResponsiveGridListBuilder(
+          //   horizontalGridSpacing: 16,
+          //   verticalGridSpacing: 16,
+          //   horizontalGridMargin: 50,
+          //   verticalGridMargin: 50,
+          //   minItemWidth: 300,
+          //   minItemsPerRow: 2,
+          //   maxItemsPerRow: 5,
+          //   builder: (context, index) =>
+          //       buildCard(context, item: foodItems[index]),
           // ),
+          // child: ResponsiveGridList(
+          //     horizontalGridSpacing: 16,
+          //     verticalGridSpacing: 16,
+          //     horizontalGridMargin: 50,
+          //     verticalGridMargin: 50,
+          //     minItemWidth: 300,
+          //     children: buildCard(context, item: item)
+          // );
 
           // child: AutoHeightGridView(
           //   itemCount: foodItems.length,
@@ -132,12 +149,12 @@ class MenuApp extends StatelessWidget {
           //   => buildCard(context, item: foodItems[index]),
           // ),
 
-          child: DynamicHeightGridView(
-            itemCount: foodItems.length,
-            crossAxisCount: MediaQuery.of(context).size.width > 600 ? 4 : 2,
-            builder: (context, index) =>
-              buildCard(context, item: foodItems[index]),
-          ),
+          // child: DynamicHeightGridView(
+          //   itemCount: foodItems.length,
+          //   crossAxisCount: MediaQuery.of(context).size.width > 600 ? 4 : 2,
+          //   builder: (context, index) =>
+          //     buildCard(context, item: foodItems[index]),
+          // ),
 
           // child: GridView.builder(
           //   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
