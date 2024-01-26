@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:auto_height_grid_view/auto_height_grid_view.dart';
 import 'package:flexible_grid_view/flexible_grid_view.dart';
+
 // import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
@@ -117,11 +118,11 @@ class MenuApp extends StatelessWidget {
           child: ResponsiveGridList(
               desiredItemWidth: 100,
               minSpacing: 10,
-              children: List.generate(foodItems.length-1, (index)=> index+1).map((i) {
-                return
-                  buildCard(context, item: foodItems[i]);
-              }).toList()
-          ),
+              children:
+                  List.generate(foodItems.length - 1, (index) => index + 1)
+                      .map((i) {
+                return buildCard(context, item: foodItems[i]);
+              }).toList()),
 
           // child: ResponsiveGridListBuilder(
           //   horizontalGridSpacing: 16,

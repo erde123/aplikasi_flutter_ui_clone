@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
+import 'package:aplikasi_flutter/detail_menu_page.dart';
 import 'package:aplikasi_flutter/menu_page.dart';
 import 'package:flutter/material.dart';
 
@@ -247,7 +248,7 @@ class MyApp extends StatelessWidget {
                                     width: 12,
                                   ),
                               itemBuilder: (BuildContext context, int index) =>
-                                  buildCard(item: foodItems[index]),
+                                  buildCard(context, item: foodItems[index]),
                             )),
                       )
                     ],
@@ -281,7 +282,7 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  Widget buildCard({required FoodItem item}) {
+  Widget buildCard(BuildContext context,{required FoodItem item}) {
     return Container(
       width: 300,
       child: Column(
@@ -291,11 +292,13 @@ class MyApp extends StatelessWidget {
             child: Ink.image(
               image: AssetImage(item.imagePath),
               fit: BoxFit.cover,
-              child: InkWell(
-                onTap: () {
-                  // Navigator.push(BuildContext context, MaterialPageRoute(builder: (context)))
-                },
-              ),
+                child: InkWell(
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DetailMenuPage(
+                              item: item,
+                            )))),
             ),
           ),
           Row(

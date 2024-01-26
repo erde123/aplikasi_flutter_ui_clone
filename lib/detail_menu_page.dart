@@ -46,6 +46,7 @@ class DetailMenuPage extends StatelessWidget {
             ]),
         body: SafeArea(
           child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -54,100 +55,119 @@ class DetailMenuPage extends StatelessWidget {
                     image: AssetImage(item.imagePath),
                   ),
                 ),
-                Row(
-                  children: [
-                    SizedBox(width: 5),
-                    Text(
-                      item.name,
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                    ),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    item.name,
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 SizedBox(
                   height: 10,
                 ),
-                Row(
-                  children: [
-                    SizedBox(width: 5),
-                    Icon(Icons.local_fire_department_outlined),
-                    Text(item.calories),
-                    SizedBox(width: 30),
-                    Icon(Icons.access_alarm),
-                    Text(item.time),
-                  ],
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Wrap(
+                    children: [
+                      SizedBox(width: 5),
+                      Icon(Icons.local_fire_department_outlined),
+                      Text(item.calories),
+                      SizedBox(width: 30),
+                      Icon(Icons.access_alarm),
+                      Text(item.time),
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: 10,
                 ),
-                Row(
-                  children: [
-                    SizedBox(width: 5),
-                    Icon(
-                      Icons.star,
-                      color: Colors.yellow,
-                    ),
-                    Text('${item.rating} /5 (${item.review} Reviews)'),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    SizedBox(width: 5),
-                    Text(
-                      "Ingredients",
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      width: 100,
-                    ),
-                    GestureDetector(
-                      child: Container(
-                        width: 45,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20),
-                                bottomLeft: Radius.circular(20)),
-                            border: Border.all(width: 1)),
-                        child: Icon(Icons.remove),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Wrap(
+                    children: [
+                      SizedBox(width: 5),
+                      Icon(
+                        Icons.star,
+                        color: Colors.yellow,
                       ),
-                      onTap: () {},
-                    ),
-                    Container(
-                      width: 45,
-                      height: 40,
-                      decoration: BoxDecoration(
-                          border: Border(
-                              top: BorderSide(
-                                color: Colors.black87,
+                      Text('${item.rating} /5 (${item.review} Reviews)'),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                "Ingredients",
+                                style: TextStyle(
+                                    fontSize: 30, fontWeight: FontWeight.bold),
                               ),
-                              bottom: BorderSide(color: Colors.black87))),
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          "1",
-                          style: TextStyle(fontSize: 20),
+                            ),
+                            Row(
+                              children: [
+                                GestureDetector(
+                                  child: Container(
+                                    width: 45,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(20),
+                                            bottomLeft: Radius.circular(20)),
+                                        border: Border.all(width: 1)),
+                                    child: Icon(Icons.remove),
+                                  ),
+                                  onTap: () {},
+                                ),
+                                Container(
+                                  width: 45,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                      border: Border(
+                                          top: BorderSide(
+                                            color: Colors.black87,
+                                          ),
+                                          bottom:
+                                              BorderSide(color: Colors.black87))),
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "1",
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ),
+                                ),
+                                GestureDetector(
+                                  child: Container(
+                                    width: 45,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                            topRight: Radius.circular(20),
+                                            bottomRight: Radius.circular(20)),
+                                        border: Border.all(width: 1)),
+                                    child: Icon(Icons.add),
+                                  ),
+                                  onTap: () {},
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                    GestureDetector(
-                      child: Container(
-                        width: 45,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(20),
-                                bottomRight: Radius.circular(20)),
-                            border: Border.all(width: 1)),
-                        child: Icon(Icons.add),
-                      ),
-                      onTap: () {},
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 5.0),
@@ -158,36 +178,61 @@ class DetailMenuPage extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    Row(
-                      children: [
-                        SizedBox(width: 20),
-                        Container(
-                          width: 60,
-                          height: 60,
-                          child: Image(
-                            image: AssetImage(
-                              'assets/image/nine.jpg',
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Flexible(
+                                  flex: 4,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 60,
+                                        height: 60,
+                                        child: Image(
+                                          image: AssetImage(
+                                            'assets/image/nine.jpg',
+                                          ),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          "Ramen Noodle",
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Flexible(
+                                  flex: 1,
+                                  child: Container(
+                                    child: Text(
+                                      "400g",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                            fit: BoxFit.cover,
-                          ),
+                          ],
                         ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Ramen Noodle",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          width: 120,
-                        ),
-                        Text(
-                          "400g",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                      ],
+                      ),
                     ),
                     Divider(
                       height: 20,
@@ -196,36 +241,61 @@ class DetailMenuPage extends StatelessWidget {
                       endIndent: 20,
                       color: Colors.black,
                     ),
-                    Row(
-                      children: [
-                        SizedBox(width: 20),
-                        Container(
-                          width: 60,
-                          height: 60,
-                          child: Image(
-                            image: AssetImage(
-                              'assets/image/nine.jpg',
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Flexible(
+                                  flex: 4,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 60,
+                                        height: 60,
+                                        child: Image(
+                                          image: AssetImage(
+                                            'assets/image/nine.jpg',
+                                          ),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          "Ramen Noodle",
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Flexible(
+                                  flex: 1,
+                                  child: Container(
+                                    child: Text(
+                                      "400g",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                            fit: BoxFit.cover,
-                          ),
+                          ],
                         ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Ramen Noodle",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          width: 120,
-                        ),
-                        Text(
-                          "400g",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                      ],
+                      ),
                     ),
                     Divider(
                       height: 20,
@@ -234,36 +304,313 @@ class DetailMenuPage extends StatelessWidget {
                       endIndent: 20,
                       color: Colors.black,
                     ),
-                    Row(
-                      children: [
-                        SizedBox(width: 20),
-                        Container(
-                          width: 60,
-                          height: 60,
-                          child: Image(
-                            image: AssetImage(
-                              'assets/image/nine.jpg',
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Flexible(
+                                  flex: 4,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 60,
+                                        height: 60,
+                                        child: Image(
+                                          image: AssetImage(
+                                            'assets/image/nine.jpg',
+                                          ),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          "Ramen Noodle",
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Flexible(
+                                  flex: 1,
+                                  child: Container(
+                                    child: Text(
+                                      "400g",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                            fit: BoxFit.cover,
-                          ),
+                          ],
                         ),
-                        SizedBox(
-                          width: 10,
+                      ),
+                    ),
+                    Divider(
+                      height: 20,
+                      thickness: 2,
+                      indent: 20,
+                      endIndent: 20,
+                      color: Colors.black,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Flexible(
+                                  flex: 4,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 60,
+                                        height: 60,
+                                        child: Image(
+                                          image: AssetImage(
+                                            'assets/image/nine.jpg',
+                                          ),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          "Ramen Noodle",
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Flexible(
+                                  flex: 1,
+                                  child: Container(
+                                    child: Text(
+                                      "400g",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                        Text(
-                          "Ramen Noodle",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Divider(
+                      height: 20,
+                      thickness: 2,
+                      indent: 20,
+                      endIndent: 20,
+                      color: Colors.black,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Flexible(
+                                  flex: 4,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 60,
+                                        height: 60,
+                                        child: Image(
+                                          image: AssetImage(
+                                            'assets/image/nine.jpg',
+                                          ),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          "Ramen Noodle",
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Flexible(
+                                  flex: 1,
+                                  child: Container(
+                                    child: Text(
+                                      "400g",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                        SizedBox(
-                          width: 120,
+                      ),
+                    ),
+                    Divider(
+                      height: 20,
+                      thickness: 2,
+                      indent: 20,
+                      endIndent: 20,
+                      color: Colors.black,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Flexible(
+                                  flex: 4,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 60,
+                                        height: 60,
+                                        child: Image(
+                                          image: AssetImage(
+                                            'assets/image/nine.jpg',
+                                          ),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          "Ramen Noodle",
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Flexible(
+                                  flex: 1,
+                                  child: Container(
+                                    child: Text(
+                                      "400g",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                        Text(
-                          "400g",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Divider(
+                      height: 20,
+                      thickness: 2,
+                      indent: 20,
+                      endIndent: 20,
+                      color: Colors.black,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Flexible(
+                                  flex: 4,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 60,
+                                        height: 60,
+                                        child: Image(
+                                          image: AssetImage(
+                                            'assets/image/nine.jpg',
+                                          ),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          "Ramen Noodle",
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Flexible(
+                                  flex: 1,
+                                  child: Container(
+                                    child: Text(
+                                      "400g",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                     Divider(
                       height: 20,
